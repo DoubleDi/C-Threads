@@ -69,7 +69,7 @@ int main(int argc, char **argv)
         }
         if (Set[1].revents & POLLIN) {
             fgets(str1, 1024, stdin);
-            str[strlen(str1) - 1] = 0;
+            str1[strlen(str1) - 1] = 0;
             send(Set[0].fd, str1, 1024, MSG_NOSIGNAL);
         }
     }
