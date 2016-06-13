@@ -1,0 +1,111 @@
+“5” = 100
+“4” =  80
+“3” = 60
+Классные практикумы по 10 баллов * 7 штук
+И сервер 2 рубежа * 15 баллов
+
+-lz – подключение библтотеки libz
+
+Джеф Элджер С++: Библиотека программиста
+С++11
+
+STL – библиотека шаблонов -> контейнеры
+Контейнеры vector list deque
+
+VECTOR
+Vector – хранит данные в куче
+Резервирует размер больше чем данных
+Capacity/size/Maxsize v[0], v[1]
+Pop_back push_back
+
+LIST
+Двусвязный список
+Std::list<int> l;
+For(std::list<int>::iterator I = l.begin(); i=l.end();i++){
+*;
+}
+
+Ассоциативыне контейнеры
+Set – множество(ввиде сбалансированных деревьях)
+Map – пара ключ-значение
+
+Gcc 4.9
+
+Multiset и Multimap – можно повторять ключи
+
+2-3 Деревья :
+2 вершина – 3 2 4
+3 вершина – 3&5 2 4 10
+Вся информация в листьях!!!!
+
+B-деревья листья в списках
+
+С++11:
+array(круче vector’a)
+Std::array<int, 10> обертка над массива
+Forward_list – односвязный список
+Хэш таблицы: h:std::string -> int
+
+Boost:: кольцевой буфер если заполняется затирает старые элементы
+
+Умные указатели
+Класс который ведет себя как указателб + функции
+
+Weak ptr – не ++ счетчик ссылjr
+Weak – выдает shared временно
+
+Аллокация
+
+LD_PRELOAD = “/usr/lib/libtcmalloc.so”
+Tcmalloc, dmalloc, jemalloc
+
+Уплотнение памяти
+
+Алгоритм Бейкера – все вместе
+Уплотнение на месте – 
+
+Практикум 1: 
+1. Умный указатель
+2. Аллокатор (alloc – через malloc, realloc, free)
+3. Уплотнение памяти
+Уплотнение – статический массив с глупыми указателями
+
+ДЗ: Репозиторий github.com и makefile + домашка создать веб сервер
+
+Через 6 недель первая часть домашки
+rvncerr@rvncerr.org
+
+cplusplus.com
+
+Пример на shared/weak ptr;
+#include <iostream>
+using namespace std;
+
+class A {
+    public:
+    shared_ptr <B> b;
+    A() { cout << "A"; }
+    ~A() { cout << "~A";}
+};
+
+class B {
+    public:
+    weak_ptr <A> a;
+    B() {cout << "B";}
+    ~B() {cout << "~B";}
+};
+
+int
+main(char argc, char * argv) {
+    shared_ptr<A> a(new A);
+    shared_ptr<B> b(new B);
+    a->b = b;
+    b->a = a;
+    {
+        std::shared_ptr <A> c= b->a.lock();
+        c->x = 1;
+    }
+    return 0;
+}
+
+
