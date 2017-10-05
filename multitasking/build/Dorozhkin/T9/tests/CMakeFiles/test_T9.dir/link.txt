@@ -1,0 +1,1 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/test_T9.dir/main.cpp.o CMakeFiles/test_T9.dir/tests.cpp.o CMakeFiles/test_T9.dir/__/src/diler.cpp.o  -o test_T9 ../../../gtest/googletest/libgtest.a 
