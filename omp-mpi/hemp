@@ -1,0 +1,56 @@
+ssh -l edu-cmc-pod16-057 regatta.cs.msu.su
+
+#include <sys/time.h>
+#include <omp.h>
+
+llq
+llcancel -u
+
+mpisubmit.bg
+
+компиляция
+mpixlc_r -qsmp=omp prog.c // -O3 -O4 -O5 -uarch=450
+
+#pragma omp parallel for shared(A,X,i) private(k,j)
+писать перед каждым циклом
+private - приватные A X - массивы; i - индекс
+shared - общие
+
+внутри цикла i - не приватная
+
+смотреть какие циклы можно делать независимо
+
+#ifdef _OPENMP
+	printf("%d %d", omp_get_max_threads())
+#endif
+
+время мерять есть open_mp time
+
+запуск
+mpisubmit.bg -n 1 -m SMP -e "OMP_NUM_THREADS=2" ./a.out
+
+
+как ведет себя задача когда много нитей, мало нитей, много помяти, мало памяти
+
+смотрим выдачу cat a.out.<num>
+
+
+
+Можно не перед каждым циклом делать параллельные области, а один раз
+#pragma omp parallel for shared(A,X,i) private(k,j)
+{
+	#pragma omp for
+
+	#pragma omp for
+
+	#pragma omp for
+
+	#pragma omp single
+}
+
+single - только одна нить
+
+nowait
+
+
+3m45.957s
